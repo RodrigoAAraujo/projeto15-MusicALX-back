@@ -1,4 +1,5 @@
-import { sessionsCollection, usersCollection } from "../database/db.js";
+import { usersCollection, sessionsCollection } from "../database/db.js";
+import { userSchema } from "../models/userSchemas.js";
 
 import bcrypt from "bcrypt";
 
@@ -25,5 +26,24 @@ export async function signinBodyValidation(req, res, next) {
 }
 
 export async function userSchemaValidation(req, res, next) {
+    const { name, email, image, password, confirmPassword } = req.body;
 
+    const user = {
+        name,
+        email,
+        image,
+        password,
+        confirmPassword
+    };
+
+    const { error } = userSchema.validate(user, { abortEarly: false });
+
+    if (error) {
+        const errors = error.details.map((detail) => detail.message);
+        return res.status(400).send(errors);
+    }
+
+    res.locals.user = user;
+
+    next();
 }
