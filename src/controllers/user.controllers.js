@@ -18,9 +18,11 @@ export async function signIn(req, res) {
     const user = res.locals.user;
     const token = uuidV4();
 
+    delete user.password
+
     try {
         await sessionsCollection.insertOne({ token, userId: user._id });
-        res.send({ token });
+        res.send({ token, user }); //Alterei para enviar o user tb 
     } catch (err) {
         console.log(err);
         res.sendStatus(500);
