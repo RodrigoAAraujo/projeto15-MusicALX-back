@@ -6,7 +6,7 @@ import {
 import {
     signinBodyValidation,
     userSchemaValidation
-} from "../middlewares/userAuth.middleware.js";
+} from "../middlewares/userAuthValidation.js";
 
 const router = Router();
 router.post("/sign-up", userSchemaValidation, signUp);
