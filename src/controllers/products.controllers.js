@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb'
-import { productsCollection } from '../database/db'
+import { productsCollection } from '../database/db.js'
 
 export async function sendProducts(req, res){
     const {type, name} = req.query

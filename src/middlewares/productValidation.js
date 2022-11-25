@@ -1,7 +1,6 @@
-import { usersCollection } from '../database/db'
-import { ProductSchema } from '../models/productSchemas'
+import { ProductSchema } from '../models/productSchemas.js'
 
-export default async function productValidation(req, res, next){
+export default function productValidation(req, res, next){
     const body = req.body
 
     const {error} = ProductSchema.validate(body)
@@ -11,17 +10,5 @@ export default async function productValidation(req, res, next){
         return
     }
 
-    try{
-        const sellerExist = await usersCollection.findOne({name: body.seller})
-
-        if(!sellerExist){
-            res.status(401).send("Vendedor não está registrado")
-            return
-        }
-
-        next()
-    }catch(err){
-        res.status(500).send({message: err})
-        return
-    }
+    next()
 }
