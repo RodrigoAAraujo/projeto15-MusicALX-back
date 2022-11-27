@@ -5,7 +5,7 @@ import productValidation from "../middlewares/productValidation.js";
 
 const router = Router()
 
-//router.use(authValidation)
+router.use(authValidation)
 
 router.get("/products", sendProducts)
 router.get("/products/:idProduct", sendSpecificProduct)
