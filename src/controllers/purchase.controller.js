@@ -5,7 +5,9 @@ export async function createPurchase(req, res) {
     const {user} = req.headers
     const cart = req.body
 
-    console.log(cart)
+    if(!user){
+        res.status(401).send("Sem e-mail do comprador")
+    }
 
     try {
         const ids = cart.map((p) => p.id)
@@ -13,7 +15,6 @@ export async function createPurchase(req, res) {
 
         for(let i = 0; i< ids.length; i++){
             const qtd_Product =  await productsCollection.findOne({ _id: ObjectId(ids[i]) });
-            console.log(qtd_Product)
 
             if(!qtd_Product){
                 res.status(404).send("Produto não cadastrado")
