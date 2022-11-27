@@ -17,7 +17,10 @@ export async function authValidation(req, res, next) {
             return res.sendStatus(401);
         }
 
+        delete user.password;
         res.locals.user = user;
+        res.locals.token = token;
+
     } catch (err) {
         console.log(err);
         return res.sendStatus(500);
