@@ -1,4 +1,4 @@
-import { usersCollection, sessionsCollection } from "../database/db.js";
+import { usersCollection } from "../database/db.js";
 import { userSchema } from "../models/userSchemas.js";
 
 import bcrypt from "bcrypt";
