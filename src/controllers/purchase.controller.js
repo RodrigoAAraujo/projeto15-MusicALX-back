@@ -22,7 +22,7 @@ export async function createPurchase(req, res) {
 
             if(!qtd_Product.qtd){
                 await productsCollection.deleteOne({_id: ObjectId(ids[i])})
-                return res.status(202).send("Item nã mais disponível")
+                return res.status(202).send("Item não está mais disponível")
             }
 
             if (Number(qtd_Product.qtd) === Number(qtd[i])){
@@ -37,7 +37,7 @@ export async function createPurchase(req, res) {
         }
 
         await purchasesCollection.insertOne({cart, buyer: user});
-        return res.status(201).send({ message: "Pagamento efetuado com sucesso!" });
+        return res.status(201).send({ message: "Pedido efetuado" });
 
     } catch (err) {
         console.log(err);
