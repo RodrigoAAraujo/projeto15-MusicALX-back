@@ -37,6 +37,7 @@ export async function createPurchase(req, res) {
         }
 
         await purchasesCollection.insertOne({cart, buyer: user});
+        await productsCollection.deleteOne({_id: ObjectId(ids[i])});
         return res.status(201).send({ message: "Pagamento efetuado com sucesso!" });
 
     } catch (err) {
