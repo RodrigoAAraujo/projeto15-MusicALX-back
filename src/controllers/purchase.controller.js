@@ -5,9 +5,7 @@ export async function createPurchase(req, res) {
     const {user} = req.headers
     const cart = req.body
 
-    if(!user){
-        res.status(401).send("Sem e-mail do comprador")
-    }
+   
 
     try {
         const ids = cart.map((p) => p.id)
