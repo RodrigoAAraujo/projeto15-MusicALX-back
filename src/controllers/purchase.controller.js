@@ -37,7 +37,7 @@ export async function createPurchase(req, res) {
         }
 
         await purchasesCollection.insertOne({cart, buyer: user});
-        return res.status(201).send({ message: "Pagamento efetuado com sucesso!" });
+        return res.status(201).send({ message: "Pedido efetuado" });
 
     } catch (err) {
         console.log(err);
